@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register – OT Scheduler</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-icon">
+      <img src="https://img.icons8.com/color/96/000000/edit-property.png" alt="Register Icon" />
+    </div>
+    <h2>Create Your Account</h2>
+    <div id="registerMessage" class="message"></div>
+    <form id="registerForm">
+      <input type="email" id="email" placeholder="Email address" required />
+      <input type="password" id="password" placeholder="Create password" required />
+      <button type="submit">Register</button>
+      <p class="auth-link">Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="../firebase/firebase.js" defer></script>
+  <script src="../js/app.js" defer></script>
+</body>
+</html>
