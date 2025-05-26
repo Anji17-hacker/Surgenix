@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Patients</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0fdfa 0%, #e0e7ff 100%);
+      font-family: 'Inter', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(60,60,120,0.10);
+      padding: 2.5em 2em 2em 2em;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      margin-bottom: 1.2em;
+      color: #16a34a;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    #patientForm {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 2em;
+    }
+    #patientForm input {
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f9fafb;
+      transition: border 0.2s;
+    }
+    #patientForm input:focus {
+      border-color: #16a34a;
+      outline: none;
+    }
+    #patientForm button[type="submit"] {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    #patientForm button[type="submit"]:hover {
+      background: #15803d;
+    }
+    #patientList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    #patientList li {
+      background: #f1f5f9;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #2d3a4b;
+      font-size: 1rem;
+    }
+    #patientList li span {
+      font-weight: 600;
+      color: #16a34a;
+    }
+    .delete-btn {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: background 0.2s;
+    }
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="firebase/firebase.js"></script>
+  <script src="js/patient.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Manage Patients</h2>
+    <form id="patientForm">
+      <input type="text" id="patientName" placeholder="Patient Name" required />
+      <input type="number" id="age" placeholder="Age" min="0" required />
+      <input type="text" id="gender" placeholder="Gender" required />
+      <button type="submit">Add Patient</button>
+    </form>
+    <ul id="patientList"></ul>
+  </div>
+</body>
+</html>

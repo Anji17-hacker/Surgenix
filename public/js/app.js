@@ -91,38 +91,30 @@ document.addEventListener('DOMContentLoaded', function () {
         scheduleMessage.classList.remove("success");
         scheduleMessage.style.color = "";
       }
+
+      // Collect data for operations
       const data = {
         doctor: document.getElementById('doctor').value,
         patient: document.getElementById('patient').value,
         datetime: document.getElementById('datetime').value,
-        details: document.getElementById('details').value,
-        createdAt: new Date()
+        roomId: document.getElementById('roomId').value,
+        surgeryType: document.getElementById('surgeryType').value,
+        anesthesia: document.getElementById('anesthesia').value,
+        anesthesiologist: document.getElementById('anesthesiologist').value,
+        assistants: document.getElementById('assistants').value,
+        nurses: document.getElementById('nurses').value,
+        materials: document.getElementById('materials').value,
+        notes: document.getElementById('notes').value,
+        timestamp: new Date().toISOString()
       };
+
       try {
-        await db.collection('schedules').add(data);
-
-        // Get current user and their role
-        const user = auth.currentUser;
-        const userDoc = await db.collection('users').doc(user.uid).get();
-        if (!userDoc.exists) {
-          if (scheduleMessage) scheduleMessage.textContent = "No user profile found in database. Please register again or contact admin.";
-          return;
-        }
-        const role = userDoc.data().role;
-
-        if (role === "admin") {
-          window.location.href = "admin.html";
-        } else {
-          window.location.href = "receipt.html";
-        }
-
-
-      } catch (err) {
-        if (scheduleMessage) {
-          scheduleMessage.textContent = err.message;
-          scheduleMessage.classList.remove("success");
-          scheduleMessage.style.color = "#b91c1c";
-        }
+        await db.collection("operations").add(data);
+        alert("Operation scheduled successfully!");
+        addScheduleForm.reset();
+      } catch (error) {
+        console.error("Error adding schedule:", error);
+        alert("Error occurred while adding schedule.");
       }
     });
   }

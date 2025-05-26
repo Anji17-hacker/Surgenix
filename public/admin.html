@@ -1,19 +1,151 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard - OT Scheduler</title>
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Admin Dashboard Table Styles */
+    #operationsTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.07);
+    }
+
+    #operationsTable th,
+    #operationsTable td {
+      padding: 12px 10px;
+      text-align: left;
+    }
+
+    #operationsTable th {
+      background: #4f8cff;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #e3e8ee;
+    }
+
+    #operationsTable tr:nth-child(even) {
+      background: #f7f9fb;
+    }
+
+    #operationsTable tr:hover {
+      background: #e6f0fa;
+    }
+
+    /* Admin Form Card */
+    form.card {
+      background: #f9fafb;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+      padding: 18px 16px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    form.card input,
+    form.card textarea {
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f9fafb;
+      transition: border 0.2s;
+      resize: none;
+    }
+
+    form.card input:focus,
+    form.card textarea:focus {
+      border-color: #4f8cff;
+      outline: none;
+    }
+
+    form.card button[type="submit"] {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+
+    form.card button[type="submit"]:hover {
+      background: #2563eb;
+    }
+
+    /* Log area */
+    .log {
+      margin-top: 20px;
+      font-size: 14px;
+      background: #f1f5f9;
+      color: #2563eb;
+      border-radius: 6px;
+      padding: 10px 14px;
+      min-height: 24px;
+    }
+
+    /* Simple nav styling */
+    nav.admin-nav {
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    nav.admin-nav a {
+      display: inline-block;
+      margin-right: 18px;
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    nav.admin-nav a:hover,
+    nav.admin-nav a.active {
+      background: #e0e7ff;
+      color: #1e40af;
+    }
+  </style>
 </head>
+
 <body class="dashboard">
   <div class="container">
+    <nav class="admin-nav">
+      <a href="admin.html" class="active">Dashboard</a>
+      <a href="doctor.html">Manage Doctors</a>
+      <a href="patient.html">Manage Patients</a>
+      <a href="schedule.html">Manage Schedules</a>
+    </nav>
     <h2>🧑‍⚕️ Admin Panel</h2>
-    <div id="adminMessage" class="message"></div>
+    <h3>Scheduled Operations</h3>
+    <table id="operationsTable">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Room ID</th>
+          <th>Surgery</th>
+          <th>Date</th>
+          <th>Assistants</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
     <form id="addScheduleForm" class="card">
       <input type="text" id="doctor" placeholder="Doctor Name" required />
       <input type="text" id="patient" placeholder="Patient Name" required />
@@ -29,7 +161,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="../firebase/firebase.js"></script>
-  <script src="../js/app.js"></script>
+  <script src="firebase/firebase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/operation.js"></script>
 </body>
+
 </html>

@@ -5,8 +5,150 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Schedules - OT Scheduler</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  
+<style>
+body.dashboard {
+  background: #f7f9fb;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 32px 24px 24px 24px;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 700;
+  color: #2d3a4b;
+  letter-spacing: 1px;
+}
+
+#logoutBtn {
+  float: right;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+#logoutBtn:hover {
+  background: #c0392b;
+}
+
+/* Form styling */
+#addScheduleForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+#addScheduleForm input,
+#addScheduleForm textarea {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s;
+  resize: none;
+}
+
+#addScheduleForm input:focus,
+#addScheduleForm textarea:focus {
+  border-color: #4f8cff;
+  outline: none;
+}
+
+#addScheduleForm button[type="submit"] {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+#addScheduleForm button[type="submit"]:hover {
+  background: #2563eb;
+}
+
+/* Message styling */
+.message {
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #2563eb;
+  font-weight: 500;
+  display: none;
+}
+.message.success {
+  background: #e6fbe8;
+  color: #1a7f37;
+  display: block;
+}
+.message.error {
+  background: #fdecea;
+  color: #d93025;
+  display: block;
+}
+
+/* Card list styling */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card {
+  background: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+  padding: 18px 16px;
+  border-left: 4px solid #4f8cff;
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: #2563eb;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card p {
+  margin: 4px 0;
+  color: #2d3a4b;
+  font-size: 0.98rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #b0b8c1;
+  font-size: 0.95rem;
+}
+</style>
+
+
+
 </head>
 
 <body class="dashboard">
@@ -14,13 +156,21 @@
     <button id="logoutBtn">Logout</button>
     <h2>📅 Scheduled Operations</h2>
      <div id="scheduleMessage" class="message"></div>
-    <form id="addScheduleForm">
-      <input type="text" id="doctor" placeholder="Doctor Name" required />
-      <input type="text" id="patient" placeholder="Patient Name" required />
-      <input type="datetime-local" id="datetime" required />
-      <input type="text" id="details" placeholder="Details" required />
-      <button type="submit">Add Schedule</button>
-    </form>
+   <form id="addScheduleForm">
+  <input type="text" id="doctor" placeholder="Doctor Name" required />
+  <input type="text" id="patient" placeholder="Patient Name" required />
+  <input type="datetime-local" id="datetime" required />
+  <input type="text" id="roomId" placeholder="Room ID" required />
+  <input type="text" id="surgeryType" placeholder="Surgery Type" required />
+  <input type="text" id="anesthesia" placeholder="Anesthesia Type" required />
+  <input type="text" id="anesthesiologist" placeholder="Anesthesiologist Name" required />
+  <input type="text" id="assistants" placeholder="Assistant Surgeon(s)" />
+  <input type="text" id="nurses" placeholder="Nurses Involved (optional)" />
+  <textarea id="materials" placeholder="Materials Required"></textarea>
+  <textarea id="notes" placeholder="Additional Notes"></textarea>
+  <button type="submit">Add Schedule</button>
+</form>
+
     <div id="scheduleList" class="card-list"></div>
   </div>
   <footer>
@@ -29,8 +179,11 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="../firebase/firebase.js"></script>
-  <script src="../js/app.js"></script>
+  <script src="firebase/firebase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/operation.js"></script>
 </body>
 
 </html>
+
+
